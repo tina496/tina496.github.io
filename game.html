@@ -3,82 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>井字遊戲</title>
+    <title>ChatGPT 介紹</title>
     <style>
-        body { text-align: center; font-family: Arial, sans-serif; }
-        .board { display: grid; grid-template-columns: repeat(3, 100px); gap: 5px; margin: 20px auto; width: 320px; }
-        .cell { width: 100px; height: 100px; font-size: 2em; display: flex; align-items: center; justify-content: center; border: 2px solid black; cursor: pointer; }
-        .cell.taken { cursor: not-allowed; }
-        #message { font-size: 1.5em; margin-top: 20px; }
+        body { font-family: Arial, sans-serif; text-align: center; margin: 50px; }
+        .container { max-width: 800px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px; box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1); }
+        h1 { color: #2c3e50; }
+        p { font-size: 18px; line-height: 1.6; }
+        .footer { margin-top: 20px; font-size: 14px; color: #888; }
     </style>
 </head>
 <body>
-    <h1>井字遊戲</h1>
-    <div class="board" id="board"></div>
-    <p id="message"></p>
-    <button onclick="resetGame()">重新開始</button>
-
-    <script>
-        const board = document.getElementById("board");
-        const message = document.getElementById("message");
-        let cells = [];
-        let currentPlayer = "X";
-        let gameActive = true;
-
-        function createBoard() {
-            board.innerHTML = "";
-            cells = [];
-            for (let i = 0; i < 9; i++) {
-                let cell = document.createElement("div");
-                cell.classList.add("cell");
-                cell.dataset.index = i;
-                cell.addEventListener("click", handleCellClick);
-                board.appendChild(cell);
-                cells.push(cell);
-            }
-        }
-
-        function handleCellClick(event) {
-            if (!gameActive) return;
-            let cell = event.target;
-            if (cell.textContent !== "") return;
-            cell.textContent = currentPlayer;
-            cell.classList.add("taken");
-            if (checkWinner()) {
-                message.textContent = `玩家 ${currentPlayer} 勝利！`;
-                gameActive = false;
-                return;
-            }
-            if (cells.every(cell => cell.textContent !== "")) {
-                message.textContent = "平局！";
-                gameActive = false;
-                return;
-            }
-            currentPlayer = currentPlayer === "X" ? "O" : "X";
-            message.textContent = `輪到 ${currentPlayer}`;
-        }
-
-        function checkWinner() {
-            const winPatterns = [
-                [0, 1, 2], [3, 4, 5], [6, 7, 8], 
-                [0, 3, 6], [1, 4, 7], [2, 5, 8], 
-                [0, 4, 8], [2, 4, 6]
-            ];
-            return winPatterns.some(pattern => {
-                const [a, b, c] = pattern;
-                return cells[a].textContent && cells[a].textContent === cells[b].textContent && cells[a].textContent === cells[c].textContent;
-            });
-        }
-
-        function resetGame() {
-            gameActive = true;
-            currentPlayer = "X";
-            message.textContent = "輪到 X";
-            createBoard();
-        }
-
-        createBoard();
-        message.textContent = "輪到 X";
-    </script>
+    <div class="container">
+        <h1>ChatGPT 介紹</h1>
+        <p>ChatGPT 是由 OpenAI 開發的先進人工智慧助手，能夠進行自然語言處理，幫助用戶回答問題、提供建議、生成內容等。</p>
+        <p>它基於強大的深度學習模型，能夠理解並生成流暢、符合上下文的文字，廣泛應用於學習、寫作、程式開發等領域。</p>
+        <p>無論是日常對話、技術支援，還是創意寫作，ChatGPT 都能提供高效且智能的幫助。</p>
+        <div class="footer">&copy; 2025 ChatGPT 介紹網頁</div>
+    </div>
 </body>
 </html>
